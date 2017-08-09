@@ -36,8 +36,8 @@ const LOG = bunyan.createLogger({
   const serverInstance = server.create({
     name: NAME,
     log: LOG,
-    secret: config.get('secret'),
-    context: config.get('context')
+    context: config.get('context'),
+    hostIp: config.get('hostIp')
   });
 
   serverInstance.listen(config.get('port'), () => {

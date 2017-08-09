@@ -1,64 +1,65 @@
 {
-    "name": "docker-mirror",
-    "version": "0.1.0",
-    "description": "A service which returns host network information of docker containers",
-    "main": "index.js",
-    "scripts": {
-        "lint": "gulp lint",
-        "test": "gulp test",
-        "start": "./start.sh main.js",
-        "docker-build": "gulp dist && docker-build",
-        "docker-publish": "npm run docker-build && docker-push"
-    },
-    "releaseme": {
-        "steps": [
-            "checkStatus",
-            "lint",
-            "test",
-            "setReleaseVersion",
-            "commitReleaseVersion",
-            "tagRelease",
-            "setNextVersion",
-            "commitNextVersion",
-            "pushChanges"
-        ]
-    },
-    "docker-registry": "loyaltyone",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/LoyaltyOne/sample-node-ecs.git"
-    },
-    "keywords": [
-        "docker",
-        "ecs",
-        "restify"
-    ],
-    "author": "LoyaltyOne",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/LoyaltyOne/sample-node-ecs/issues"
-    },
-    "homepage": "https://github.com/LoyaltyOne/sample-node-ecs#readme",
-    "devDependencies": {
-        "chai": "^3.5.0",
-        "del": "^2.2.2",
-        "gulp": "^3.9.1",
-        "gulp-eslint": "^3.0.1",
-        "gulp-install": "^1.1.0",
-        "gulp-istanbul": "^1.1.1",
-        "gulp-mocha": "^3.0.1",
-        "gulp-zip": "^4.0.0",
-        "mocha": "^3.2.0",
-        "supertest": "^3.0.0",
-        "supertest-as-promised": "^4.0.2",
-        "docker-build-run-push": "^3.0.0"
-    },
-    "dependencies": {
-        "assert-plus": "^1.0.0",
-        "bunyan": "^1.8.10",
-        "convict": "^3.0.0",
-        "restify": "^4.3.0",
-        "restify-errors": "^4.3.0",
-        "restify-router": "^0.4.2"
-    }
+  "name": "docker-mirror",
+  "version": "0.1.0",
+  "description": "A service which returns host network information of docker containers",
+  "main": "index.js",
+  "scripts": {
+    "lint": "gulp lint",
+    "test": "gulp test",
+    "start": "./start.sh main.js",
+    "docker-build": "gulp dist && docker-build",
+    "docker-publish": "npm run docker-build && docker-push"
+  },
+  "releaseme": {
+    "steps": [
+      "checkStatus",
+      "lint",
+      "test",
+      "setReleaseVersion",
+      "commitReleaseVersion",
+      "tagRelease",
+      "setNextVersion",
+      "commitNextVersion",
+      "pushChanges"
+    ]
+  },
+  "docker-registry": "loyaltyone",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LoyaltyOne/sample-node-ecs.git"
+  },
+  "keywords": [
+    "docker",
+    "ecs",
+    "restify"
+  ],
+  "author": "LoyaltyOne",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LoyaltyOne/sample-node-ecs/issues"
+  },
+  "homepage": "https://github.com/LoyaltyOne/sample-node-ecs#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^3.0.1",
+    "gulp-install": "^1.1.0",
+    "gulp-istanbul": "^1.1.1",
+    "gulp-mocha": "^3.0.1",
+    "gulp-zip": "^4.0.0",
+    "mocha": "^3.2.0",
+    "supertest": "^3.0.0",
+    "supertest-as-promised": "^4.0.2",
+    "docker-build-run-push": "^3.0.0"
+  },
+  "dependencies": {
+    "assert-plus": "^1.0.0",
+    "bunyan": "^1.8.10",
+    "convict": "^3.0.0",
+    "dockerode": "^2.5.0",
+    "restify": "^4.3.0",
+    "restify-errors": "^4.3.0",
+    "restify-router": "^0.4.2"
+  }
 }

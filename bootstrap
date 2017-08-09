@@ -1,0 +1,10 @@
+#!/bin/sh
+
+HOST_IP_FILE="/etc/hostip"
+
+if [ -f $HOST_IP_FILE ]
+then
+    export HOST_IP=$(cat $HOST_IP_FILE)
+fi
+
+exec "$@"

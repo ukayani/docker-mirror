@@ -4,6 +4,9 @@ const restify = require('restify');
 const assert = require('assert-plus');
 const errors = require('restify-errors');
 const Router = require('restify-router').Router;
+const Docker = require('dockerode');
+
+const docker = new Docker();
 
 const registerMiddleware = (server) => {
   // Clean up sloppy paths like //todo//////1//
@@ -27,9 +30,33 @@ const registerRoutes = (server, options) => {
   const router = new Router();
   const prefix = options.context;
 
-  router.get('/info/:id', (req, res, next) => {
+  router.get('/container/:id/port/:port', (req, res, next) => {
+    res.setHeader('content-type', 'text/plain');
+    docker.getContainer(req.params.id).inspect().then(data => {
+      const portKey = `${req.params.port}/tcp`;
+      const ports = data.NetworkSettings.Ports;
+      const hostIp = req.query.hostIp || '0.0.0.0';
 
-    res.send({message: `Hello World ${req.params.id}`, name: options.name});
+      if (portKey in ports) {
+        const portEntry = ports[portKey].find(e => e.HostIp === hostIp);
+        if (!portEntry) {
+          res.send(404, `No port found with hostname: ${hostIp}`);
+        } else {
+          res.send(200, parseInt(portEntry.HostPort));
+        }
+      } else {
+        res.send(404, 'Port not found');
+      }
+      next();
+    }).catch(() => {
+      res.send(404, 'Container not found');
+      next();
+    });
+  });
+
+  router.get('/hostip', (req, res, next) => {
+    res.setHeader('content-type', 'text/plain');
+    res.send(200, options.hostIp);
     next();
   });
 
@@ -46,6 +73,7 @@ const create = (options) => {
 
   assert.object(options, 'options');
   assert.string(options.name, 'name');
+  assert.string(options.hostIp, 'hostIp');
 
   options.context = options.context || '';
 

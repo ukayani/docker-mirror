@@ -2,7 +2,6 @@
 
 const restify = require('restify');
 const assert = require('assert-plus');
-const errors = require('restify-errors');
 const Router = require('restify-router').Router;
 const Docker = require('dockerode');
 
@@ -32,13 +31,13 @@ const registerRoutes = (server, options) => {
 
   router.get('/container/:id/port/:port', (req, res, next) => {
     res.setHeader('content-type', 'text/plain');
-    docker.getContainer(req.params.id).inspect().then(data => {
+    docker.getContainer(req.params.id).inspect().then((data) => {
       const portKey = `${req.params.port}/tcp`;
       const ports = data.NetworkSettings.Ports;
       const hostIp = req.query.hostIp || '0.0.0.0';
 
       if (portKey in ports) {
-        const portEntry = ports[portKey].find(e => e.HostIp === hostIp);
+        const portEntry = ports[portKey].find((e) => e.HostIp === hostIp);
         if (!portEntry) {
           res.send(404, `No port found with hostname: ${hostIp}`);
         } else {

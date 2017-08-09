@@ -4,9 +4,8 @@ WORKDIR /opt/app
 
 # Copy contents of dist to /opt/app
 ADD dist /opt/app
-# Give ownership to daemon user
-RUN ["chown", "-R", "daemon:daemon", "."]
-USER daemon
+
+USER root
 
 COPY bootstrap /usr/local/bin/
 # allow any commands to supply arguments to the node app

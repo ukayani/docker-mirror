@@ -2,7 +2,7 @@
 
 if [ "$TRAVIS_TAG" != "" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     echo "Building docker image $DOCKER_REPO:$TRAVIS_TAG"
-    docker login -u $DOCKER_USER -p $DOCKER_PASS
+    docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
 
     npm run-script docker-publish
 fi

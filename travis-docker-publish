@@ -6,4 +6,3 @@ if [ "$TRAVIS_TAG" != "" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
 
     npm run-script docker-publish
 fi
-

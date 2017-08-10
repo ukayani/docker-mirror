@@ -1,9 +1,9 @@
-'use strict'
+'use strict';
 const server = require('./lib/server');
 const bunyan = require('bunyan');
 const restify = require('restify');
+const Docker = require('dockerode');
 const config = require('./lib/config').get();
-
 const NAME = require('./package.json').name;
 
 // In true UNIX fashion, debug messages go to stderr, and audit records go
@@ -33,12 +33,16 @@ const LOG = bunyan.createLogger({
 
 (function main() {
 
-  const serverInstance = server.create({
-    name: NAME,
-    log: LOG,
-    context: config.get('context'),
-    hostIp: config.get('hostIp')
-  });
+  const serverInstance = server.create(
+    {
+      name: NAME,
+      log: LOG,
+      context: config.get('context'),
+      hostIp: config.get('hostIp')
+    },
+    {
+      docker: new Docker()
+    });
 
   serverInstance.listen(config.get('port'), () => {
     LOG.info('listening at %s', serverInstance.url);

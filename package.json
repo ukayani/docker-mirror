@@ -23,7 +23,7 @@
             "pushChanges"
         ]
     },
-    "docker-registry": "loyaltyone",
+    "docker-user": "loyaltyone",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/LoyaltyOne/docker-mirror.git"

@@ -1,0 +1,21 @@
+sudo: required
+language: node_js
+node_js:
+- 7.4.0
+services:
+- docker
+env:
+  global:
+  - COMMIT=${TRAVIS_COMMIT::8}
+  - DOCKER_REPO=loyaltyone/docker-mirror
+  - secure: FL46J/qNgw7ldlwcCXOGQYpUMq4MxzGkh6hoKLGziZFnhMu5RI5UwpYojdBz/czHdliqJKkaLZcHcCqrK6S/pUGoolyIOw3aRf71DLf3Xl6hmZTSCtyNh/+k7dTfvAOIVBxrgGQpXjyi+0mNzIqLBdi4XHHdwGUZ+aSJ6aW/3OOVL7Sn6UJxRXm/5mH9/YB1r6USCLaTl/F6MUCPWHD5j6zB6U1YIqN3pV17PZTZdW4sNtv7SzmLniWFQ/QL+cWwqa6zd9ARzvabZbnXWN80fMe6fTQ7lwftCvB3Qxob9aXMXBl/LQRlgfkSBd4o5b/tmXOCGogcxdLrbFIz3gWZTpimKfu7FWmJw6KntOncxYio8N7WWxtH930WvnvAb38maQIylYdZN8KjyKJ4U7I8KM2uq/E/DmWFZ+bTJdJ4eIiuhsTPVwLsVBeJAq3ddL8nm1JO9kHV9s/TNn6nr6cSh+gG6UecooOVBRt2kygiGvYqeEbPUpvDw+bAhcPxtnhDqEDl+4ouvwdvvArN3z+wvNglOZbhO4dGIfoDxHOgZzjtq/2KsQcih5haT1ow0+QSF9CDh7sPg9VG4SifqKd5KdZeeahp/yolLMhBkLxOyZmqEB4ju+cS2lNhYdyI/ymo1UzOqje3pERCq7GTXepBK8uOsCdP75WtOxXPO7SXLTQ=
+script:
+- export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH;
+  else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
+- echo "TRAVIS_BRANCH=$TRAVIS_BRANCH, BRANCH=$BRANCH TAG=$TRAVIS_TAG"
+- npm install
+- npm install -g gulp
+- npm test
+
+after_success:
+- ./travis-docker-publish

@@ -26,7 +26,7 @@
     "docker-registry": "loyaltyone",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/LoyaltyOne/sample-node-ecs.git"
+        "url": "git+https://github.com/LoyaltyOne/docker-mirror.git"
     },
     "keywords": [
         "docker",
@@ -36,9 +36,9 @@
     "author": "LoyaltyOne",
     "license": "ISC",
     "bugs": {
-        "url": "https://github.com/LoyaltyOne/sample-node-ecs/issues"
+        "url": "https://github.com/LoyaltyOne/docker-mirror/issues"
     },
-    "homepage": "https://github.com/LoyaltyOne/sample-node-ecs#readme",
+    "homepage": "https://github.com/LoyaltyOne/docker-mirror#readme",
     "devDependencies": {
         "chai": "^3.5.0",
         "del": "^2.2.2",

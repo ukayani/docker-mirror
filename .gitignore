@@ -22,8 +22,7 @@ coverage
 build/Release
 
 # Dependency directory
-/node_modules
-!dist/node_modules
+node_modules
 
 # Optional npm cache directory
 .npm
@@ -53,3 +52,5 @@ test/fakedata/data/
 
 # Swagger generated spec
 swaggerSpec.json
+
+dist

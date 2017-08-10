@@ -3,12 +3,9 @@
 const restify = require('restify');
 const assert = require('assert-plus');
 const Router = require('restify-router').Router;
-const Docker = require('dockerode');
-
-const docker = new Docker();
 
 const registerMiddleware = (server) => {
-  // Clean up sloppy paths like //todo//////1//
+  // Clean up sloppy paths like //info//////1//
   server.pre(restify.pre.sanitizePath());
 
   // Handles annoying user agents (curl)
@@ -24,14 +21,15 @@ const registerMiddleware = (server) => {
   server.use(restify.gzipResponse());
 };
 
-const registerRoutes = (server, options) => {
+const registerRoutes = (server, options, deps) => {
 
   const router = new Router();
   const prefix = options.context;
+  const dockerClient = deps.docker;
 
   router.get('/container/:id/port/:port', (req, res, next) => {
     res.setHeader('content-type', 'text/plain');
-    docker.getContainer(req.params.id).inspect().then((data) => {
+    dockerClient.getContainer(req.params.id).inspect().then((data) => {
       const portKey = `${req.params.port}/tcp`;
       const ports = data.NetworkSettings.Ports;
       const hostIp = req.query.hostIp || '0.0.0.0';
@@ -68,7 +66,7 @@ const registerRoutes = (server, options) => {
   return server;
 };
 
-const create = (options) => {
+const create = (options, deps) => {
 
   assert.object(options, 'options');
   assert.string(options.name, 'name');
@@ -82,7 +80,7 @@ const create = (options) => {
   });
 
   registerMiddleware(server);
-  registerRoutes(server, options);
+  registerRoutes(server, options, deps);
 
   return server;
 };

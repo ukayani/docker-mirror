@@ -29,6 +29,20 @@ application container) using the following query:
 $(/sbin/ip route | awk '/default/ { print $3 }')
 ```
 
+Here's what you would execute in your container:
+```bash
+#!/bin/bash
+DOCKER_MIRROR_HOST=$(/sbin/ip route | awk '/default/ { print $3 }')
+
+DOCKER_MIRROR_PORT=${MIRROR_PORT:-9001}
+DOCKER_MIRROR="http://$DOCKER_MIRROR_HOST:$DOCKER_MIRROR_PORT"
+
+# HOSTNAME is the Docker Container ID
+# APP_PORT is the Container Port 
+export HOST_IP=$(curl $DOCKER_MIRROR/hostip) 
+export HOST_PORT=$(curl $DOCKER_MIRROR/container/$HOSTNAME/port/$APP_PORT)
+```
+
 Nodes in clustered applications (for example Akka Cluster) need to
 communicate with each other. The premise is that each node in the
 clustered application runs in a Docker container and on multiple Hosts.
@@ -73,7 +87,7 @@ Docker Daemon is mounted into the Docker Mirror Container.
 
 ```bash
 docker run -d --name docker-mirror \
--p 9001:9000 --restart always \
+-p 9001:9001 --restart always \
 -v /var/run/docker.sock:/var/run/docker.sock \
 -v /etc/hostip:/etc/hostip \
 loyaltyone/docker-mirror:0.1.2

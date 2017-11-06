@@ -54,7 +54,8 @@ within your application container) using the following query:
 $(/sbin/ip route | awk '/default/ { print $3 }')
 ```
 
-Here's what you would execute in your container:
+Here is an example of what you could run to retrieve this information in
+your container:
 ```bash
 #!/bin/bash
 DOCKER_MIRROR_HOST=$(/sbin/ip route | awk '/default/ { print $3 }')

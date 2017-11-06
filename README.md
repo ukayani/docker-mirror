@@ -14,7 +14,7 @@ From inside the container, you cannot (_easily_) obtain information
 about the machine (Host) running your Container and the port mappings
 that direct traffic from the Host to the Container.
 
-![image](https://user-images.githubusercontent.com/14280155/32447909-6cfb26bc-c2db-11e7-9931-5b1e50fd058e.png)
+![image](https://user-images.githubusercontent.com/14280155/32448019-bf29e37e-c2db-11e7-9460-d13ccce89187.png)
 
 Docker Mirror is an _introspection_ web service for Docker Containers.
 Given a Container ID and a Container Port, Docker Mirror will be tell

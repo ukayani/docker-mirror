@@ -20,6 +20,14 @@ Docker Mirror is an _introspection_ web service for Docker Containers.
 Given a Container ID and a Container Port, Docker Mirror will be tell
 you the Host IP and the Host Port that the Container is running on.
 
+![image](https://user-images.githubusercontent.com/14280155/32453019-2d684936-c2e9-11e7-8fb4-2acee2149499.png)
+
+The application communicates with Docker Mirror using the bridge/docker0 IP. This assumes you have Docker Mirror 
+running in the same Docker network as your application. You can obtain the bridge/docker0 IP using the following query:
+```bash
+$(/sbin/ip route|awk '/default/ { print $3 }')
+```
+
 Nodes in clustered applications (for example Akka Cluster) need to
 communicate with each other. The premise is that each node in the
 clustered application runs in a Docker container and on multiple Hosts.

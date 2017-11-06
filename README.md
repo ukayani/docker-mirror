@@ -23,9 +23,10 @@ you the Host IP and the Host Port that the Container is running on.
 ![image](https://user-images.githubusercontent.com/14280155/32453019-2d684936-c2e9-11e7-8fb4-2acee2149499.png)
 
 The application communicates with Docker Mirror using the bridge/docker0 IP. This assumes you have Docker Mirror 
-running in the same Docker network as your application. You can obtain the bridge/docker0 IP using the following query:
+running in the same Docker network as your application. You can obtain the bridge/docker0 IP (from within your
+application container) using the following query:
 ```bash
-$(/sbin/ip route|awk '/default/ { print $3 }')
+$(/sbin/ip route | awk '/default/ { print $3 }')
 ```
 
 Nodes in clustered applications (for example Akka Cluster) need to

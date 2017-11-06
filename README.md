@@ -103,10 +103,3 @@ provide the Host-to-Container port mappings. We also mount a file
 Host Machine. Docker Mirror needs to be running on every Host Machine
 where Docker Containers will be run and where this introspection
 functionality will be needed.
-
-
-## Example ##
-
-_Using Docker Mirror to obtain information_
-
-TBD

@@ -22,7 +22,7 @@ We recommend running Docker Mirror as a container with a restart policy.
 
 ```bash
 docker run -d --name docker-mirror \
--p 9001:9001 --restart always \
+-p 9001:9000 --restart always \
 -v /var/run/docker.sock:/var/run/docker.sock \
 -v /etc/hostip:/etc/hostip \
 loyaltyone/docker-mirror:0.1.2

@@ -44,7 +44,7 @@ Docker Mirror is an _introspection_ web service for Docker containers.
 Given a container ID and a container Port, Docker Mirror will tell you
 the host IP and the host Port that the container is running on.
 
-![image](https://user-images.githubusercontent.com/14280155/32453019-2d684936-c2e9-11e7-8fb4-2acee2149499.png)
+![image](https://user-images.githubusercontent.com/14280155/32524747-2b1b6c38-c3ef-11e7-88eb-243f681eedd3.png)
 
 The application communicates with Docker Mirror using the bridge/docker0
 IP. This assumes you have Docker Mirror running in the same Docker
